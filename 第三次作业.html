@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一次作业</title>
+</head>
+<script>
+    //lv0
+    const person = {
+        name: 'csa',
+        age: 1000000,
+        address: {
+            city: 'ChongQing',
+            area: 'NanShan'
+        },
+        title: ['student', { year: 2021, title: 'GoodStudent' }]
+    }
+    let { name, age: year, address: { city }, address: { area: mountain }, title: [title1, title4] } = person;
+    let { title: title2, title3 = 'God' } = title4;
+    console.log(name);
+    console.log(year);
+    console.log(city);
+    console.log(mountain);
+    console.log(title1);
+    console.log(title2);
+    console.log(title3);
+    //lv1
+    //以下进行的是用循环来计算n!
+    let i;
+    let sum = 1;
+    function factorial1(n) {
+
+        for (i = 1; i <= n; i++) {
+            sum = sum * i;
+        }
+        console.log(sum);
+    }
+
+    factorial1(10);
+    //以下进行的是用递归来计算n!
+    function factorial2(n) {
+        if (n == 1)
+            return 1;
+        else
+            return n * factorial2(n - 1);
+
+    }
+    console.log(factorial2(10));
+    /*lv2浅拷贝
+    对象的地址存放在栈里，而数据放在堆里，进行拷贝时，实际上就是将地址进行了复制，拥有同样地址的对象，可以对地址指向的数据进行操作；
+    浅拷贝实际上复制的就是其引用；当属性是原类型是，只复制其值，并且引用对象中该属性的变化并不会引起原对象的变化；
+    当属性是对象时，复制的是其地址，所以引用对象该属性的变化会导致原对象的变化；该浅拷贝是只对原对象进行一层拷贝。
+    */
+    var obj = {
+        a: 1,
+        b: {
+            a: '你好'
+        }
+    }
+    function fun(obj) {
+        var m = {};
+        for (var k in obj) {
+            m[k] = obj[k];
+        }
+        return m;
+    }
+
+    var createObj1 = fun(obj);
+    /*lv3深拷贝
+        将原对象所有的属性全部拷贝，并且在内存中重新开辟一个新的内存，当属性是对象时，将原对象的属性拷贝到引用的新属性中，两个属性不在同一个内存中，所以是相互独立，互补影响的。
+        ,对原对象进行多层拷贝，直到全是原对象为止*/
+
+    var m = JSON.parse(JSON.stringify(obj));//系统自带的方法
+    function fun2() {
+        var m = {};//建立一个空对象
+        if (obj == 'object') {
+            for (var k in obj) {
+                if (typeof obj[k] == 'object')
+                    m[k] = fun1(obj[k]);//进行多次循环，直到是原类型为止
+                else m[k] = obj[k];
+            }
+        }
+        return m;
+    }
+    var createObj2 = fun2(obj);
+</script>
+
+<body>
+
+</body>
+
+</html>
